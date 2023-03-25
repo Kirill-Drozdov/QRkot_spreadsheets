@@ -1,14 +1,20 @@
+from copy import deepcopy
 from datetime import datetime
 
 from aiogoogle import Aiogoogle
 
 from app.core.config import settings
-from app.core.constants import FORMAT, TABLE_VALUES, SPREADSHEET_BODY
+from app.core.constants import (
+    FORMAT,
+    TABLE_VALUES,
+    SPREADSHEET_BODY,
+    ROW_COUNT
+)
 
 
 async def spreadsheets_create(
         wrapper_services: Aiogoogle,
-        spreadsheet_body=SPREADSHEET_BODY
+        spreadsheet_body=deepcopy(SPREADSHEET_BODY)
 ) -> str:
     now_date_time = datetime.now().strftime(FORMAT)
     service = await wrapper_services.discover('sheets', 'v4')
@@ -17,7 +23,8 @@ async def spreadsheets_create(
         service.spreadsheets.create(json=spreadsheet_body)
     )
     spreadsheet_id = response['spreadsheetId']
-    print(f'https://docs.google.com/spreadsheets/d/{spreadsheet_id}')  # TODO Убрать отладочный принт.
+    # TODO Убрать отладочный принт.
+    print(f'https://docs.google.com/spreadsheets/d/{spreadsheet_id}')
     return response['spreadsheetId']
 
 
@@ -49,15 +56,18 @@ async def spreadsheets_update_value(
         completion_rate = res.close_date - res.create_date
         new_row = [str(res.name), str(completion_rate), str(res.description)]
         TABLE_VALUES.append(new_row)
-
     update_body = {
         'majorDimension': 'ROWS',
         'values': TABLE_VALUES
     }
+    rows_total = len(TABLE_VALUES)
+    if rows_total > ROW_COUNT:
+        raise ValueError('В таблице превышен лимит строк!')
+
     await wrapper_services.as_service_account(
         service.spreadsheets.values.update(
             spreadsheetId=spreadsheet_id,
-            range='A1:E30',
+            range=f'R1C1:R{rows_total}C3',
             valueInputOption='USER_ENTERED',
             json=update_body
         )
