@@ -26,7 +26,7 @@ async def spreadsheets_create(
             str,
             Dict[str, Union[str, int]]
         ]
-                    ]
+                ]
             ]
         ] = deepcopy(SPREADSHEET_BODY)
 ) -> str:
