@@ -7,10 +7,11 @@ from pydantic import BaseModel, Extra, Field, PositiveInt
 class DonationBase(BaseModel):
     """Базовый класс для пожертвования."""
     full_amount: Optional[PositiveInt]
-    comment: Optional[str] = Field(None, min_length=1)
+    comment: Optional[str] = Field(None,)
 
     class Config:
         extra = Extra.forbid
+        min_anystr_length = 1
 
 
 class DonationCreate(DonationBase):

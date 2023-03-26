@@ -9,19 +9,27 @@ TABLE_VALUES = [
 ROW_COUNT = 100
 COLUMN_COUNT = 11
 SHEET_ID = 0
+PROPERTIES_TITLE = 'Отчет от {}'
+SHEETS_TITLE = 'Лист1'
 
 SPREADSHEET_BODY = dict(
     properties=dict(
-        title='Отчет от {}',
+        title=...,
         locale='ru_RU',
     ),
     sheets=[dict(properties=dict(
         sheetType='GRID',
         sheetId=SHEET_ID,
-        title='Лист1',
+        title=SHEETS_TITLE,
         gridProperties=dict(
             rowCount=ROW_COUNT,
             columnCount=COLUMN_COUNT,
         )
     ))]
+)
+
+PERMISSIONS_BODY = dict(
+    type='user',
+    role='writer',
+    emailAddress=...,
 )
