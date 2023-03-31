@@ -55,11 +55,44 @@ python3 -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+Создать файл .env и заполнить его по примеру
+из файла .env_example.
+
+Значения переменных окружения:
+
+```
+EMAIL
+TYPE
+PROJECT_ID
+PRIVATE_KEY_ID
+PRIVATE_KEY
+CLIENT_EMAIL
+CLIENT_ID
+AUTH_URI
+TOKEN_URI
+AUTH_PROVIDER_X509_CERT_URL
+CLIENT_X509_CERT_URL
+```
+необходимо заполнить из JSON-файла
+с ключом доступа к сервисному аккаунту.
+
+Подробнее в документации:
+
+```
+https://cloud.google.com/docs
+```
+
+
 Запустить проект:
 
 ```
 uvicorn app.main:app
 ```
+
+### Спецификация
+
+По адресу http://127.0.0.1:8000/docs будет доступна спецификация к проекту,
+где представлены примеры запросов к API и структура ответов.
 
 ## Об авторе проекта:
 Проект выполнил студент Яндекс Практикума -

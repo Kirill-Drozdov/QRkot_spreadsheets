@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import BaseSettings, EmailStr
+from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -10,8 +10,6 @@ class Settings(BaseSettings):
     DATABASE_URL: str = 'sqlite+aiosqlite:///./charity_fund.db'
     SECRET: str = 'SECRET'
     TOKEN_LIFETIME_SECONDS: int = 36000
-    FIRST_SUPERUSER_EMAIL: Optional[EmailStr] = None
-    FIRST_SUPERUSER_PASSWORD: Optional[str] = None
     # GoogleCloud info
     type: Optional[str] = None
     project_id: Optional[str] = None
