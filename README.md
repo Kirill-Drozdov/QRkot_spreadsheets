@@ -76,12 +76,7 @@ CLIENT_X509_CERT_URL
 необходимо заполнить из JSON-файла
 с ключом доступа к сервисному аккаунту.
 
-Подробнее в документации:
-
-```
-https://cloud.google.com/docs
-```
-
+Подробнее в документации [Google Cloud](https://cloud.google.com/docs)
 
 Запустить проект:
 
